@@ -13,4 +13,7 @@ tensorflow
 joblib
 transformers
 keras-tuner
-matplotlib
+matplotlibstreamlit
+torch
+torch-geometric
+torchdiffeq
