@@ -13,7 +13,8 @@ from sklearn.preprocessing import MinMaxScaler
 # TensorFlow / Keras
 import tensorflow as tf
 from tensorflow.keras.models import load_model
-from tensorflow.keras.layers import Layer  # REMOVED TRANSFORMER: Removed MultiHeadAttention import
+from tensorflow.keras.layers import LSTM as _KerasLSTM
+from tensorflow.keras.layers import Layer# REMOVED TRANSFORMER: Removed MultiHeadAttention import
 
 # PyTorch, PyTorch Geometric
 import torch
@@ -301,11 +302,21 @@ class AttentionLayer(Layer):
 ###############################################################################
 # 6) Load CNN+LSTM + Attention
 ###############################################################################
+class _LegacyLSTM(_KerasLSTM):
+    def __init__(self, *args, **kwargs):
+        kwargs.pop("time_major", None)      # ignore the legacy flag
+        super().__init__(*args, **kwargs)
+
+CUSTOM_OBJECTS = {
+    "AttentionLayer": AttentionLayer,
+    "LSTM": _LegacyLSTM,                   # use patched class
+}
+
 def load_cnn_lstm_attention_model(ticker):
     path = f"model/{ticker}_cnn_lstm_attention_model_tuned.h5"
     if not os.path.exists(path):
         raise FileNotFoundError(f"No CNN+LSTM model at {path}")
-    return load_model(path, custom_objects={"AttentionLayer": AttentionLayer})
+    return load_model(path, custom_objects=CUSTOM_OBJECTS, compile=False)
 
 
 ###############################################################################
