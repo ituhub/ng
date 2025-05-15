@@ -14,3 +14,4 @@ joblib
 transformers
 keras-tuner
 matplotlib
+torch
