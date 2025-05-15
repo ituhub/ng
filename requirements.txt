@@ -9,7 +9,7 @@ xgboost
 deap
 scikit-optimize
 textblob
-tensorflow
+tensorflow==2.12.0
 joblib
 transformers
 keras-tuner
