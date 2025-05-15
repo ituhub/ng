@@ -20,4 +20,5 @@ stable-baselines3
 gym
 hmmlearn
 torchdiffeq
+shimmy>=2.0
 
