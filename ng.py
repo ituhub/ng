@@ -305,7 +305,7 @@ def load_cnn_lstm_attention_model(ticker):
     path = f"model/{ticker}_cnn_lstm_attention_model_tuned.h5"
     if not os.path.exists(path):
         raise FileNotFoundError(f"No CNN+LSTM model at {path}")
-    return load_model(path, custom_objects={"AttentionLayer": AttentionLayer})
+    return load_model(path, custom_objects={"AttentionLayer": AttentionLayer}, compile=False)
 
 
 ###############################################################################
