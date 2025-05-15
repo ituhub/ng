@@ -1,0 +1,16 @@
+SigTra AI Trading Software – License Agreement
+
+Starter/Pro: Licensed for personal or internal commercial use only.
+Enterprise: Licensed for external commercial use (excluding code resale).
+
+You may not redistribute, resell, or sublicense this software without explicit permission.
+
+© 2025 itubusinesshub – All rights reserved.
+
+
+Disclaimer:
+
+This software is provided "as is" without warranties of any kind. 
+It does not constitute financial advice. Trading involves risk, and the creator is not liable for any loss or damages resulting from its use.
+
+Use at your own discretion.
