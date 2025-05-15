@@ -273,24 +273,39 @@ def prepare_single_time_data(df):
 ###############################################################################
 # 5) Our Keras AttentionLayer
 ###############################################################################
+###############################################################################
+# 5) Our Keras AttentionLayer  (replaces the old definition)
+###############################################################################
 class AttentionLayer(Layer):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
     def build(self, input_shape):
         feat_dim = input_shape[-1]
-        self.W = self.add_weight("att_weight", shape=(feat_dim, feat_dim), initializer="normal")
-        self.b = self.add_weight("att_bias", shape=(feat_dim,), initializer="zeros")
-        self.u = self.add_weight("att_u", shape=(feat_dim, 1), initializer="normal")
+
+        # --- keyword arguments everywhere ------------------------------------
+        self.W = self.add_weight(
+            name="att_weight",           # <-- NEW
+            shape=(feat_dim, feat_dim),
+            initializer="normal"
+        )
+        self.b = self.add_weight(
+            name="att_bias",             # <-- NEW
+            shape=(feat_dim,),
+            initializer="zeros"
+        )
+        self.u = self.add_weight(
+            name="att_u",                # <-- NEW
+            shape=(feat_dim, 1),
+            initializer="normal"
+        )
         super().build(input_shape)
 
     def call(self, inputs):
-        # (batch, time, features)
-        x_tanh = tf.nn.tanh(tf.tensordot(inputs, self.W, axes=[2,0]) + self.b)
-        score = tf.tensordot(x_tanh, self.u, axes=[2,0])  # => (batch, time, 1)
-        att_weights = tf.nn.softmax(score, axis=1)
-        context_vector = att_weights * inputs
-        context_vector = tf.reduce_sum(context_vector, axis=1)  # => (batch, features)
+        x_tanh = tf.nn.tanh(tf.tensordot(inputs, self.W, axes=[2, 0]) + self.b)
+        score  = tf.tensordot(x_tanh, self.u, axes=[2, 0])          # (batch,time,1)
+        att    = tf.nn.softmax(score, axis=1)
+        context_vector = tf.reduce_sum(att * inputs, axis=1)        # (batch,feat)
         return context_vector
 
 
