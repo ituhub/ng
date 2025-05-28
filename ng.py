@@ -812,7 +812,7 @@ This application is provided for **educational and informational purposes only**
 Any decisions based on the output of this tool are **made at your own risk**.  
 The developer is **not liable** for any losses or damages resulting from use of this application.
 
----
+---)
 
 sent_score = 0.0
 econ_value = 0.0
