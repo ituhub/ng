@@ -803,6 +803,17 @@ ticker = st.sidebar.selectbox("Select a Ticker", tickers)
 fetch_news = st.sidebar.checkbox("Fetch News & Economic?", value=False)
 fetch_trends = st.sidebar.checkbox("Fetch Google Trends?", value=False)
 
+# ✅ Insert Disclaimer Here
+st.sidebar.markdown("""
+---
+### ⚠️ Disclaimer
+
+This application is provided for **educational and informational purposes only** and does not constitute financial, investment, or trading advice.  
+Any decisions based on the output of this tool are **made at your own risk**.  
+The developer is **not liable** for any losses or damages resulting from use of this application.
+
+---
+
 sent_score = 0.0
 econ_value = 0.0
 if fetch_news:
